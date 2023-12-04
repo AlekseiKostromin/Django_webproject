@@ -1,7 +1,6 @@
 from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
-
 from blog.models import Article
 
 
