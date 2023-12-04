@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, TemplateView
 
 from catalog.models import Product, Contact
 
@@ -49,6 +49,19 @@ class ProductDetail(DetailView):
         return context_data
 
 
-class ContactsView(ListView):
-    model = Contact
+#class ContactsView(ListView):
+#    model = Contact
+#    template_name = 'catalog/contacts.html'
+
+class ContactsView(TemplateView):
     template_name = 'catalog/contacts.html'
+    extra_context = {
+        'title': 'Контакты!',
+    }
+
+    def post(self, request, *args, **kwargs):
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        message = request.POST.get('message')
+        print(f'name: {name}, email: {email}, message: {message}')
+        return render(request, 'catalog/contacts.html', self.extra_context)
