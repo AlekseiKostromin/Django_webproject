@@ -22,7 +22,7 @@ class ArticleUpdateView(UpdateView):
 
 
 class ArticleListView(ListView):
-    paginate_by = 10
+    paginate_by = 2
     model = Article
     extra_context = {'title': 'Полезная информация'}
 
