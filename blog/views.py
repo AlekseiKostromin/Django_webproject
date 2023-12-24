@@ -1,6 +1,7 @@
 from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
+
 from blog.models import Article
 
 
@@ -22,9 +23,9 @@ class ArticleUpdateView(UpdateView):
 
 
 class ArticleListView(ListView):
-    paginate_by = 2
+    paginate_by = 10
     model = Article
-    extra_context = {'title': 'Полезная информация'}
+    extra_context = {'title': 'Блог'}
 
     def get_queryset(self, *args, **kwargs):
         queryset = super().get_queryset(*args, **kwargs)
@@ -50,3 +51,8 @@ class ArticleDetailView(DetailView):
 class ArticleDeleteView(DeleteView):
     model = Article
     success_url = reverse_lazy('blog:blog')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = f'Удаление "{self.object.title}"'
+        return context
