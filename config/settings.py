@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os.path
 from pathlib import Path
 
+from dotenv import load_dotenv
+
+env_path = Path('.') / '.env'
+load_dotenv(dotenv_path=env_path)
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -33,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'catalog',  # Приложение создано.
-    'blog' # Новое приложение.
+    'blog'  # Новое приложение.
+    'users',  # Новое приложение.
 ]
 
 MIDDLEWARE = [
@@ -116,3 +122,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR / 'media')  # Медиа-файлы
 MEDIA_URL = '/media/'  # Медиа-файлы
 
 AUTH_USER_MODEL = 'users.User'
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+# mailing settings -- sending letters to console
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

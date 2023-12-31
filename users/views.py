@@ -52,7 +52,7 @@ class RegisterView(CreateView):
         new_user.save()
         # Отправляем письмо с подтверждением
         current_site = get_current_site(self.request)
-        mail_subject = 'Conrirm registration'
+        mail_subject = 'Confirm registration'
         message = render_to_string(
             'users/email_check.html',
             {
@@ -146,9 +146,12 @@ class UserPasswordResetConfirmView(PasswordResetConfirmView):
 
 
 class ProfileView(UpdateView):
+    """
+    Представление редактирования профиля
+    """
     model = User
     form_class = UserProfileForm
-    success_url = reverse_lazy('users:profile')
+    success_url = reverse_lazy('catalog:index')
 
     def get_object(self, queryset=None):
         return self.request.user
