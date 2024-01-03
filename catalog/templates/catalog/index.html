@@ -3,16 +3,6 @@
 {% load static %}
 
 {% block content %}
-
-<div class="col-12 mb-3">
-    <a href="{% url 'catalog:item_create' %}" class="btn btn-outline-primary">Создать новый товар</a>
-</div>
-
-{% extends 'catalog/base.html' %}
-{% load media_tag %}
-{% load static %}
-
-{% block content %}
     {% if user.is_authenticated %}
         <div class="col-12 mb-3">
             <a href="{% url 'catalog:item_create' %}" class="btn btn-outline-primary">Создать новый товар</a>
@@ -65,4 +55,4 @@
         </small>
     </span>
 </div>
-{% endblock %
+{% endblock %}
